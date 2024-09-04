@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/221677e8-05ce-42b8-beee-b96d695d403e/resourceGroups/EijiPT-JS-RG/providers/Microsoft.Web/sites/EijiPT-JS",
+    "appService.deploySubpath": "."
+}
