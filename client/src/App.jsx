@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 function APICall_Test() {
-    axios.get('https://eijipt-js.azurewebsites.net/home').then((data) => {
+    axios.get('http://localhost:3000').then((data) => {
         console.log(data);
     })
 }
