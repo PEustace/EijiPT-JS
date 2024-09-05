@@ -4,7 +4,7 @@ var cors = require('cors');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send("Hello from the server!!");
+  res.render('index', { title: 'Express' });
 });
 
 module.exports = router;
