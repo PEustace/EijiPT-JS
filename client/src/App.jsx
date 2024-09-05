@@ -14,7 +14,7 @@ function App() {
     return (
         <div>
         <h1>
-            This is a demo for the EijiPT app.
+            This is a demo for the app.
         </h1>
         <button onClick={APICall_Test}>Test Call</button>
         </div>
