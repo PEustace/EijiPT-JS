@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
-app.use('/api/', indexRouter);
+app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/chat', chatRouter);
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import axios from 'axios';
+//import axios from 'axios';
 
 
 /*function CallChat(chatType, userText) {
@@ -15,11 +15,12 @@ import axios from 'axios';
         console.log(error.message);
     })
 }*/
-function CallChat(chatType, userText) {
+/*function CallChat(chatType, userText) {
     axios.get('https://eijipt-js.azurewebsites.net/api/chat').then((data) => {
         console.log(data);
     });
-}
+}*/
+
 
 function ChatPortal() {
     const [userTextState, setChatValue] = useState('');
@@ -30,7 +31,11 @@ function ChatPortal() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        CallChat("user", userTextState);
+        fetch('https://eijipt-js.azurewebsites.net/api/')
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+        //CallChat("user", userTextState);
     }
     return (
         <form onSubmit={handleSubmit}>
