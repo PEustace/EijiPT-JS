@@ -1,20 +1,20 @@
 import { useState } from 'react'
 import './App.css'
-//import axios from 'axios';
+import axios from 'axios';
 
 
-/*function CallChat(chatType, userText) {
-    axios.post("https://eijipt-js.azurewebsites.net/chat", {
+function CallChat(chatType, userText) {
+    axios.post("http://localhost:3000/api/chat", {
         chatType: chatType, //Type of chat, i.e. basic tutor or translator
         userText: userText}) //User's text entered
     .then(response => {
-        console.log(response.data.message)
+        console.log(response.data)
     })
     .catch(error => {
         console.log(error);
         console.log(error.message);
     })
-}*/
+}
 /*function CallChat(chatType, userText) {
     axios.get('https://eijipt-js.azurewebsites.net/api/chat').then((data) => {
         console.log(data);
@@ -31,11 +31,7 @@ function ChatPortal() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch('https://eijipt-js.azurewebsites.net/api/')
-        .then(response => console.log(response))
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
-        //CallChat("user", userTextState);
+        CallChat("user", userTextState);
     }
     return (
         <form onSubmit={handleSubmit}>
