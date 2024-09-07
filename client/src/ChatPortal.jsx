@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 function CallChat(chatType, userText) {
-    axios.put("https://eijipt-js.azurewebsites.net/chat", {
+    axios.post("https://eijipt-js.azurewebsites.net/chat", {
         chatType: chatType, //Type of chat, i.e. basic tutor or translator
         userText: userText}) //User's text entered
     .then(response => {
@@ -17,7 +17,7 @@ function CallChat(chatType, userText) {
 }
 
 function ChatPortal() {
-    const [userChat, setChatValue] = useState('');
+    const [userTextState, setChatValue] = useState('');
     
     function handleChange(e) {
         setChatValue(e.target.value);
@@ -25,13 +25,13 @@ function ChatPortal() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        CallChat("user", userChat);
+        CallChat("user", userTextState);
     }
     return (
         <form onSubmit={handleSubmit}>
             <h1> This is a demo for the app.</h1>
-            <textarea id="userChat" name="userChat"
-            value = {userChat}
+            <textarea id="userText" name="userText"
+            value = {userTextState}
             onChange={handleChange}
             
             ></textarea>

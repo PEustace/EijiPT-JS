@@ -12,7 +12,7 @@ const APIKey = "sk-proj-4mzhOEwmAd8HdvONVnttBdOpFmDrq4nIBPwZMp9qtOn16ghYEPPGatMT
 router.get('/', function(req, res, next) {
     //res.sendFile('/index.html', {root: __dirname + '/../'});
     var chatType = req.query.chatType;
-    var userChat = req.query.userChat;
+    var userText = req.query.userText;
     var prompt = "Introduce yourself.";
 
     if (chatType == "user") {
@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
             "content": prompt},
             
             {"role": "user", 
-            "content": userChat
+            "content": userText
             }],
         headers={
             'Authorization': APIKey
