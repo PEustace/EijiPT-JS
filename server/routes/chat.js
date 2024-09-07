@@ -9,7 +9,7 @@ const APIKey = "sk-proj-4mzhOEwmAd8HdvONVnttBdOpFmDrq4nIBPwZMp9qtOn16ghYEPPGatMT
 
 //Accepting call for the chat to be executed.
 //userChat, chatType params
-router.get('/chat', function(req, res, next) {
+router.get('/', function(req, res, next) {
     //res.sendFile('/index.html', {root: __dirname + '/../'});
     var chatType = req.query.chatType;
     var userChat = req.query.userChat;
