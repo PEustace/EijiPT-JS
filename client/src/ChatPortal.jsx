@@ -32,7 +32,7 @@ function ChatPortal() {
     function handleSubmit(e) {
         e.preventDefault();
         fetch('https://eijipt-js.azurewebsites.net/api/')
-        .then(response => response.json())
+        .then(response => console.log(response))
         .then(data => console.log(data))
         .catch(error => console.error(error));
         //CallChat("user", userTextState);
