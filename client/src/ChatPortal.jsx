@@ -16,7 +16,7 @@ import axios from 'axios';
     })
 }*/
 function CallChat(chatType, userText) {
-    axios.get('https://eijipt-js.azurewebsites.net/').then((data) => {
+    axios.get('https://eijipt-js.azurewebsites.net/chat').then((data) => {
         console.log(data);
     });
 }
