@@ -3,7 +3,7 @@ import './App.css'
 import axios from 'axios';
 
 
-function CallChat(chatType, userText) {
+/*function CallChat(chatType, userText) {
     axios.post("https://eijipt-js.azurewebsites.net/chat", {
         chatType: chatType, //Type of chat, i.e. basic tutor or translator
         userText: userText}) //User's text entered
@@ -14,6 +14,11 @@ function CallChat(chatType, userText) {
         console.log(error);
         console.log(error.message);
     })
+}*/
+function CallChat(chatType, userText) {
+    axios.get('https://eijipt-js.azurewebsites.net/').then((data) => {
+        console.log(data);
+    });
 }
 
 function ChatPortal() {
