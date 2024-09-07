@@ -4,7 +4,10 @@ import axios from 'axios';
 
 
 function CallChat(chatType, userText) {
-    axios.post("https://eijipt-js.azurewebsites.net/handlechat", {"chatType": chatType, "userText": userText})
+    axios.post("https://eijipt-js.azurewebsites.net/chat", {"chatType": chatType, "userText": userText})
+    .then(response => {
+        console.log(response.data.message)
+    })
 }
 
 function ChatPortal() {
@@ -22,7 +25,7 @@ function ChatPortal() {
             onChange={handleChange}
             
             ></textarea>
-            <button onClick={CallChat("basic", userChat)}>^</button>
+            <button onClick={CallChat("user", userChat)}>^</button>
         </form>
         
     );
