@@ -1,5 +1,5 @@
-var express = require('express');
-const chat = require('../my_modules/chat.mjs');
+import express from 'express';
+const chat = require('../my_modules/chat.js');
 var router = express.Router();
 
 //Accepting call for the chat to be executed.
