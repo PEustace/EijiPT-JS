@@ -18,7 +18,7 @@ export async function SendChat(reqChatType, reqUserText) {
     
 
     if (chatType == "user") {
-    prompt = "You are a Japanese language tutor named Eiji (or 英字). You will act as if you are human with a real life. Introduce yourself and respond to the user's request."
+    prompt = "You are a Japanese language tutor named Eiji (or 英字). You will act as if you are human with a real life and history. Introduce yourself and respond to the user's request."
     }
     //console.log("Funkiest monkiest.");
     const completion = await client.chat.completions.create({

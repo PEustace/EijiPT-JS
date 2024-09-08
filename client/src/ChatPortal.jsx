@@ -8,7 +8,8 @@ function CallChat(chatType, userText) {
         chatType: chatType, //Type of chat, i.e. basic tutor or translator
         userText: userText}) //User's text entered
     .then(response => {
-        console.log(response.data)
+        console.log(response.data);
+        return response.data;
     })
     .catch(error => {
         console.log(error);
@@ -24,6 +25,7 @@ function CallChat(chatType, userText) {
 
 function ChatPortal() {
     const [userTextState, setChatValue] = useState('');
+    const [chatDisplayState, setDisplayValue] = useState('');
     
     function handleChange(e) {
         setChatValue(e.target.value);
@@ -31,7 +33,9 @@ function ChatPortal() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        CallChat("user", userTextState);
+        var chatResponse = CallChat("user", userTextState);
+        setDisplayValue(chatResponse);
+        console.log(chatResponse);
     }
     return (
         <form onSubmit={handleSubmit}>
@@ -41,6 +45,7 @@ function ChatPortal() {
             onChange={handleChange}
             
             ></textarea>
+            <h1>Eiji: {chatDisplayState} </h1>
             {/*it runs every re-render if we don't make it an arrow function*/}
             <button type="submit">^</button>
         </form>
