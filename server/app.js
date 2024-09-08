@@ -1,28 +1,31 @@
-var createError = require('http-errors');
+var cors = require('cors');
 var express = require('express');
 var path = require('path');
+var app = express();
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index.js');
-var usersRouter = require('./routes/users.js');
-var chatRouter = require('./routes/chat.js');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var chatRouter = require('./routes/chat')
 
-var cors = require('cors');
+//const chatRouter = await import('./routes/chat.mjs');
 
-var app = express();
+//
+//async function ModuleImportCompatHandler() {
+    
+//}
 
-// view engine setup
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'jade');
+//import('./routes/chat.js').then(chat => console.log(chat.main));
+//ModuleImportCompatHandler() //commonjs >:(
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(cors());
+
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/chat', chatRouter);
@@ -44,4 +47,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-export default app;
