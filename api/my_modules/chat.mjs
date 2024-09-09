@@ -1,4 +1,4 @@
-import OpenAI from 'openai';
+import OpenAI from 'openai/index.mjs';
 import express from 'express';
 var router = express.Router();
 const client = new OpenAI();
