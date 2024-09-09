@@ -53,7 +53,7 @@ function ChatPortal() {
 //This is the chatbox component to display what the AI says, to be used as a subcomponent of ChatPortal
 function ChatBox({chatResponse}) {
     return(
-        <p>Eiji: {chatResponse ? chatResponse : "Hello, I'm Eiji, your personal Japanese tutor! How can I help you today?"}</p>
+        <p>Eiji: {chatResponse ? chatResponse : "Hello, I'm Eiji, your personal Japanese tutor! If you have questions about grammar, vocabulary, culture, or anything else, ask away!"}</p>
     );
 }
 

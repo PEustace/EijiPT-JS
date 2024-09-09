@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client'
 import ChatPortal from './ChatPortal.jsx'
 import './index.css'
 
+//console.log("Hello.");
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ChatPortal />
