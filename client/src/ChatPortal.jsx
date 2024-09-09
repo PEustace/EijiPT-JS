@@ -3,17 +3,15 @@ import './App.css'
 import axios from 'axios';
 
 
-function CallChat(chatType, userText) {
-    axios.post("http://localhost:3000/api/chat", {
+async function CallChat(chatType, userText) {
+    const response = await axios.post("http://localhost:3000/api/chat", {
         chatType: chatType, //Type of chat, i.e. basic tutor or translator
         userText: userText}) //User's text entered
-    .then(response => {
-        console.log(response.data)
-    })
     .catch(error => {
         console.log(error);
         console.log(error.message);
     })
+    return response.data;
 }
 /*function CallChat(chatType, userText) {
     axios.get('https://eijipt-js.azurewebsites.net/api/chat').then((data) => {
@@ -24,33 +22,43 @@ function CallChat(chatType, userText) {
 
 function ChatPortal() {
     const [userTextState, setChatValue] = useState('');
+    const [chatDisplayState, setDisplayValue] = useState('');
     
     function handleChange(e) {
         setChatValue(e.target.value);
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-        CallChat("user", userTextState);
+        var chatResponse = await CallChat("user", userTextState);
+        setDisplayValue(chatResponse);
+        console.log(chatResponse);
     }
     return (
         <form onSubmit={handleSubmit}>
-            <h1> This is a demo for the app.</h1>
+            <h1> EijiPT</h1>
+            <ChatBox chatResponse={chatDisplayState}></ChatBox>
             <textarea id="userText" name="userText"
             value = {userTextState}
             onChange={handleChange}
             
             ></textarea>
-            {/*it runs every re-render if we don't make it an arrow function*/}
+            {/*it runs every re-render if we don't make it an arrow function. Or it did.*/}
             <button type="submit">^</button>
         </form>
         
     );
 }
 
-export default ChatPortal
-
+//This is the chatbox component to display what the AI says, to be used as a subcomponent of ChatPortal
+function ChatBox({chatResponse}) {
+    return(
+        <p>Eiji: {chatResponse ? chatResponse : "Hello, I'm Eiji, your personal Japanese tutor! How can I help you today?"}</p>
+    );
+}
 
 /* axios.get('https://eijipt-js.azurewebsites.net').then((data) => {
         console.log(data);
     })*/
+
+export default ChatPortal
