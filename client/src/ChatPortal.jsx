@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 async function CallChat(chatType, userText) {
-    const response = await axios.post("https://yellow-wave-0d2d9450f.5.azurestaticapps.net/api/chat", {
+    const response = await axios.post("https://eijipt-js.azurewebsites.net/api/chat", {
         chatType: chatType, //Type of chat, i.e. basic tutor or translator
         userText: userText}) //User's text entered
     .catch(error => {
