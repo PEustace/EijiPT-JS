@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 async function CallChat(chatType, userText) {
-    const response = await axios.post("/api/chat", {
+    const response = await axios.post("http://localhost:3000/api/chat", {
         chatType: chatType, //Type of chat, i.e. basic tutor or translator
         userText: userText}) //User's text entered
     .catch(error => {
@@ -30,9 +30,12 @@ function ChatPortal() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        var chatResponse = await CallChat("user", userTextState);
+        var chatPass = userTextState;
+        setChatValue('');
+        var chatResponse = await CallChat("user", chatPass);
         setDisplayValue(chatResponse);
         console.log(chatResponse);
+        
     }
     return (
         <form onSubmit={handleSubmit}>
