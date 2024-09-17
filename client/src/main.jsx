@@ -7,6 +7,6 @@ import './index.css'
 //console.log("Hello.");
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <a href="chatpage/index.html">Go To Chat</a>
+    <a href="/chatpage/">Go To Chat</a>
   </StrictMode>,
 )
