@@ -27,7 +27,8 @@ function ChatPortal() {
     function handleChange(e) {
         setChatValue(e.target.value);
     }
-
+    //The initial axios request is async but we need additional async handling because
+    //the call to OpenAI is async as well so that messes up the response
     async function handleSubmit(e) {
         e.preventDefault();
         var chatPass = userTextState;
@@ -38,10 +39,11 @@ function ChatPortal() {
         
     }
     return (
-        <form onSubmit={handleSubmit}>
-            <h1> EijiPT</h1>
+        <div>
+        <h1 className="title"> EijiPT</h1>
+        <form className="chatForm" onSubmit={handleSubmit}>
             <ChatBox chatResponse={chatDisplayState}></ChatBox>
-            <textarea id="userText" name="userText"
+            <textarea className="userEntry" id="chatBox" name="chatBox"
             value = {userTextState}
             onChange={handleChange}
             
@@ -49,6 +51,7 @@ function ChatPortal() {
             {/*it runs every re-render if we don't make it an arrow function. Or it did.*/}
             <button type="submit">^</button>
         </form>
+        </div>
         
     );
 }
@@ -56,7 +59,7 @@ function ChatPortal() {
 //This is the chatbox component to display what the AI says, to be used as a subcomponent of ChatPortal
 function ChatBox({chatResponse}) {
     return(
-        <p>Eiji: {chatResponse ? chatResponse : "Hello, I'm Eiji, your personal Japanese tutor! If you have questions about grammar, vocabulary, culture, or anything else, ask away!"}</p>
+        <p className="chatResponse">Eiji: {chatResponse ? chatResponse : "Hello, I'm Eiji, your personal Japanese tutor! If you have questions about grammar, vocabulary, culture, or anything else, ask away!"}</p>
     );
 }
 

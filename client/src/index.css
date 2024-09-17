@@ -66,3 +66,30 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.userEntry {
+  color: #000000;
+  background-color: #ffd6a3;
+  font-weight: bold;
+
+  border: rgb(255, 119, 0)
+}
+
+.chatForm {
+
+}
+
+.chatResponse {
+  font-size: large;
+  text-align: center;
+  color: rgb(255, 166, 0);
+
+
+}
+
+.title {
+  font-size:larger;
+  position:relative;
+  left: 500px;
+  top:30px;
+}
