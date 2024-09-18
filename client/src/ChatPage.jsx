@@ -5,8 +5,10 @@ import ChatPortal from './ChatPortal.jsx'
 import './index.css'
 
 //console.log("Hello.");
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    
     <ChatPortal />
   </StrictMode>,
-)
+);

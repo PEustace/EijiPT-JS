@@ -39,8 +39,6 @@ function ChatPortal() {
         
     }
     return (
-        <div>
-        <h1 className="title">EijiPT</h1>
         <form className="chatForm" onSubmit={handleSubmit}>
             <ChatBox chatResponse={chatDisplayState}></ChatBox>
             <textarea className="userEntry" id="chatBox" name="chatBox"
@@ -51,7 +49,6 @@ function ChatPortal() {
             {/*it runs every re-render if we don't make it an arrow function. Or it did.*/}
             <button type="submit">^</button>
         </form>
-        </div>
         
     );
 }
