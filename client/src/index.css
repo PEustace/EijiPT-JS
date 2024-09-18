@@ -90,6 +90,6 @@ button:focus-visible {
 .title {
   font-size:larger;
   position:relative;
-  left: 500px;
-  top:30px;
+  left: 10px;
+  top:10px;
 }

@@ -40,7 +40,7 @@ function ChatPortal() {
     }
     return (
         <div>
-        <h1 className="title"> EijiPT</h1>
+        <h1 className="title">EijiPT</h1>
         <form className="chatForm" onSubmit={handleSubmit}>
             <ChatBox chatResponse={chatDisplayState}></ChatBox>
             <textarea className="userEntry" id="chatBox" name="chatBox"
