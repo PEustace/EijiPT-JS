@@ -95,15 +95,22 @@ button:focus-visible {
   position:relative;
 }
 
-.navBar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: inline;
+div.navBar nav {
+  text-align:center;
 }
-.title {
+
+div.navBar ul {
+  list-style-type: none;
+  overflow: hidden;
+  display: inline-block;
+}
+
+div.navBar li {
+  display:inline;
+  margin: 0;
+  padding: 20px;
+}
+div.navBar h1 {
   font-size: 40px;
-  position:relative;
-  left: 45%;
-  top: 10%;
+  text-align: center;
 }

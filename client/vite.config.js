@@ -11,7 +11,10 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        chatpage: resolve(__dirname, 'chatpage/index.html')
+        chatpage: resolve(__dirname, 'chatpage/index.html'),
+        practice: resolve(__dirname, 'practice/index.html'),
+        travel: resolve(__dirname, '/travel/'),
+        quiz: resolve(__dirname, '/quiz/'),
       }
     }
   },

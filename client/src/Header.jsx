@@ -15,10 +15,11 @@ function Header() {
 
             <nav>
                 <ul>
-                    <li>Home</li>
-                    <li>Questions</li>
-                    <li>Worksheets</li>
-                    <li>Travel</li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/chatpage/">Ask a Question</a></li>
+                    <li><a href="/practice/">Worksheets and Practice</a></li>
+                    <li><a href="/travel/">Travel Help</a></li>
+                    <li><a href="/quiz/">Quiz</a></li>
                 </ul>
             </nav>
         </div>
