@@ -29,19 +29,49 @@ export async function SendChat(reqChatType, reqUserText) {
             "content": prompt},
             
             {"role": "user", 
-            "content": userText
+            "content": userValue
             }]
     }).catch((error) => {console.log(error)});
-    /*const openai = new OpenAI();
-    const completion = await openai.chat.completions.create({
-    model: "gpt-4o",
-    messages: [
-        {"role": "user", "content": "write a haiku about ai"}
-    ]
-    });*/
+
     console.log("About to send the choice.");
     console.log(completion.choices[0]);
     return completion.choices[0].message.content;
 
+}
+
+//Function for worksheet requests.
+export async function RequestWorksheet(req) {
+    var difficulty = req.body.difficulty;
+    var type = req.body.type;
+    var isKey = req.body.key;
+
+    if (isKey) {
+        isKey = ". Separate at the bottom with the string @123 and afterwords create only the answer key."
+    }
+    else {
+        isKey = ".";
+    }
+    //Construct prompt
+    var prompt = "Generate a formatted Japanese learning worksheet with a level of " + {difficulty} + ". The subject matter should be " + {type} + isKey + " No meta, html tags.";
+
+    var response = ChatCompile(prompt, "none");
+
+    return response.choices[0].message.content;
+}
+
+async function ChatCompile(prompt, userValue) {
+
+    var messageJson = [{"role": "system", "content": prompt}];
+
+    if (userValue != "none") {
+        messageJson.push({"role": "user", "content": userValue});
+    }
+
+    const completion = await client.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: messageJson
+    }).catch((error) => {console.log(error)});
+
+    return completion;
 }
 //module.exports = SendChat;

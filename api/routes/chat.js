@@ -13,10 +13,15 @@ pullModule();
 //Accepting call for the chat to be executed.
 //userChat, chatType params
 router.post('/', async function(req, res, next) {
-    console.log("I got it.");
+    console.log("Chat request received.");
     const response = await chat.SendChat(req.body.chatType, req.body.userText);
     console.log("Response: " + response);
     res.send(response);
 });
+
+router.post('/worksheet', async function(req, res, next) {
+    console.log("Worksheet request received.")
+    const response = await chat.RequestWorksheet(req.body);
+})
 
 module.exports = router;
