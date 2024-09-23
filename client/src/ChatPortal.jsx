@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 async function CallChat(chatType, userText) {
-    const response = await axios.post("https://eijipt-api--jbh6rnq.internal.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/chat", {
+    const response = await axios.post("https://eijipt-api--jbh6rnq.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/chat", {
         chatType: chatType, //Type of chat, i.e. basic tutor or translator
         userText: userText}) //User's text entered
     .catch(error => {
