@@ -29,7 +29,7 @@ export async function SendChat(reqChatType, reqUserText) {
             "content": prompt},
             
             {"role": "user", 
-            "content": userValue
+            "content": userText
             }]
     }).catch((error) => {console.log(error)});
 
