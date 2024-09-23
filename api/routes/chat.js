@@ -19,9 +19,9 @@ router.post('/', async function(req, res, next) {
     res.send(response);
 });
 
-router.post('/worksheet', async function(req, res, next) {
-    console.log("Worksheet request received.")
-    const response = await chat.RequestWorksheet(req.body);
-})
+//router.post('/worksheet', async function(req, res, next) {
+    //console.log("Worksheet request received.")
+    //const response = await chat.RequestWorksheet(req.body);
+//})
 
 module.exports = router;
