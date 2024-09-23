@@ -4,8 +4,8 @@ import axios from 'axios';
 
 
 async function TestCall() {
-    const response = await axios.get('https://eijipt-api--jbh6rnq.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/').catch(error => console.log(error.message));
-    console.log(response.data);
+    var response = await axios.get('https://eijipt-api--4k7pblj.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/').then(console.log("Sent.")).catch(error => console.log(error.message));
+    console.log(response);
 }
 async function CallChat(chatType, userText) {
     const response = await axios.post('https://eijipt-api--jbh6rnq.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/chat', {
@@ -37,8 +37,8 @@ function ChatPortal() {
         e.preventDefault();
         var chatPass = userTextState;
         setChatValue('');
-        //var chatResponse = await CallChat("user", chatPass);
         TestCall();
+        //var chatResponse = await CallChat("user", chatPass);
         //setDisplayValue(chatResponse);
         //console.log(chatResponse);
         

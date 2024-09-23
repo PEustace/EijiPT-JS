@@ -9,6 +9,7 @@ async function pullModule() {
 }
 
 pullModule();
+//test
 
 //Accepting call for the chat to be executed.
 //userChat, chatType params
