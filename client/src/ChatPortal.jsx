@@ -18,10 +18,10 @@ async function CallChat(chatType, userText) {
     const response = await axios.post('https://eijiptjs-api.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/chat/', {
         chatType: chatType, //Type of chat, i.e. basic tutor or translator
         userText: userText}) //User's text entered
-    .then((res) => {return res;})
     .catch(error => {
         return error;
     })
+    return response.data;
 }
 /*function CallChat(chatType, userText) {
     axios.get('https://eijipt-js.azurewebsites.net/api/chat').then((data) => {
