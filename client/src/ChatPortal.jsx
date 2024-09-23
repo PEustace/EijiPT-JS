@@ -3,8 +3,12 @@ import './App.css'
 import axios from 'axios';
 
 
+async function TestCall() {
+    const response = await axios.get('https://eijipt-api--jbh6rnq.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/').catch(error => console.log(error.message));
+    console.log(response.data);
+}
 async function CallChat(chatType, userText) {
-    const response = await axios.post("https://eijipt-api--jbh6rnq.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/chat", {
+    const response = await axios.post('https://eijipt-api--jbh6rnq.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/chat', {
         chatType: chatType, //Type of chat, i.e. basic tutor or translator
         userText: userText}) //User's text entered
     .catch(error => {
@@ -33,9 +37,10 @@ function ChatPortal() {
         e.preventDefault();
         var chatPass = userTextState;
         setChatValue('');
-        var chatResponse = await CallChat("user", chatPass);
-        setDisplayValue(chatResponse);
-        console.log(chatResponse);
+        //var chatResponse = await CallChat("user", chatPass);
+        TestCall();
+        //setDisplayValue(chatResponse);
+        //console.log(chatResponse);
         
     }
     return (
