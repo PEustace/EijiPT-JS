@@ -2,19 +2,26 @@ import { useState } from 'react'
 import './App.css'
 import axios from 'axios';
 
+//VERY EXPLICITLY DO NOT USE THE INGRESS ENDPOINT
+//For whatever reason, using the ingress endpoint is... a dead end.
+//Use the application URL from now on--you can find by going to:
+//Azure->Container Apps->Managed Environment->Container App->Browse
+//Copy that URL. Use /api for a test call which should return "Hello!"
 
 async function TestCall() {
-    axios.post("https://eijipt-api--4k7pblj.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/").then((res) => {console.log(res)}).catch(error => console.log(error.message));
+    console.log("Sending!");
+    
+    const response = axios.get("https://eijiptjs-api.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/").catch(error => console.log(error.message));
+    return response;
 }
 async function CallChat(chatType, userText) {
-    const response = await axios.post('https://eijipt-api--jbh6rnq.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/chat', {
+    const response = await axios.post('https://eijiptjs-api.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/chat/', {
         chatType: chatType, //Type of chat, i.e. basic tutor or translator
         userText: userText}) //User's text entered
+    .then((res) => {return res;})
     .catch(error => {
-        console.log(error);
-        console.log(error.message);
+        return error;
     })
-    return response.data;
 }
 /*function CallChat(chatType, userText) {
     axios.get('https://eijipt-js.azurewebsites.net/api/chat').then((data) => {
@@ -36,10 +43,11 @@ function ChatPortal() {
         e.preventDefault();
         var chatPass = userTextState;
         setChatValue('');
-        TestCall();
-        //var chatResponse = await CallChat("user", chatPass);
-        //setDisplayValue(chatResponse);
-        //console.log(chatResponse);
+        //var test = await TestCall();
+        //console.log(test);
+        var chatResponse = await CallChat("user", chatPass);
+        setDisplayValue(chatResponse);
+        console.log(chatResponse);
         
     }
     return (

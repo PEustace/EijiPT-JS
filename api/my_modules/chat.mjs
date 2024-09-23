@@ -61,11 +61,11 @@ export async function RequestWorksheet(req) {
 
 async function ChatCompile(prompt, userValue) {
 
-    var messageJson = [{"role": "system", "content": prompt}];
-
-    if (userValue != "none") {
-        messageJson.push({"role": "user", "content": userValue});
+    if (userValue == "system") {
+        messageJson.push({"role": "system", "content": "You are a Japanese tutor bot."});
     }
+
+    var messageJson = [{"role": "user", "content": prompt}];
 
     const completion = await client.chat.completions.create({
         model: "gpt-3.5-turbo",
