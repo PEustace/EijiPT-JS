@@ -44,39 +44,42 @@ export async function SendChat(reqChatType, reqUserText) {
 //
 //
 //Function for worksheet requests.
-export async function RequestWorksheet(req) {
-    console.log("Body: " + req);
-    var difficulty = req.body.difficulty;
-    var type = req.body.type;
-    var isKey = req.body.key;
+export async function RequestWorksheet(difficultyPass, typePass, keyPass) {
+    console.log("Reqpass: " + difficultyPass + typePass + keyPass);
+    var difficulty = difficultyPass;
+    var type = typePass;
+    var isKey = keyPass;
 
-    if (isKey) {
+    if (isKey == "yes") {
         isKey = ". Separate at the bottom with the string @123 and afterwords create only the answer key."
     }
     else {
         isKey = ".";
     }
     //Construct prompt
-    var prompt = "Generate a formatted Japanese learning worksheet with a level of " + {difficulty} + ". The subject matter should be " + {type} + isKey + " No meta, html tags.";
+    var prompt = "Generate an HTML-form-formatted Japanese learning worksheet with three sections with a level of " + difficulty + ". The subject matter should be " + type + isKey + " Give only the html tags that can slot into an existing <body>, so no doctype or <html>, etc. No submit button.";
 
-    var response = ChatCompile(prompt, "none");
+    var response = ChatCompile(prompt);
 
-    return response.choices[0].message.content;
+    return response;
 }
 
-async function ChatCompile(prompt, userValue) {
+async function ChatCompile(prompt) {
 
-    if (userValue == "system") {
-        messageJson.push({"role": "system", "content": "You are a Japanese tutor bot."});
-    }
+    //userValue removed
 
-    var messageJson = [{"role": "user", "content": prompt}];
+    //if (userValue == "system") {
+    //  messageJson.push({"role": "system", "content": "You are a Japanese tutor bot."});
+    //}
+
+    var messageJson = {"role": "system", "content": prompt};
+    console.log(messageJson);
 
     const completion = await client.chat.completions.create({
         model: "gpt-3.5-turbo",
-        messages: messageJson
+        messages: [messageJson]
     }).catch((error) => {console.log(error)});
 
-    return completion;
+    return completion.choices[0].message.content;
 }
 //module.exports = SendChat;

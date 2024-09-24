@@ -11,7 +11,7 @@ import axios from 'axios';
 
 //I'd like to keep /worksheet as the endpoint here even if the scope changes later (i.e. graded readings)
 async function CallChat(difficulty, type, key) {
-    const response = await axios.post("https://eijiptjs-api.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/chat/worksheet", {
+    const response = await axios.post("http://localhost:3000/api/chat/worksheet", {
         difficulty: difficulty,
         type: type,
         key: key})  //JSON data
@@ -89,8 +89,9 @@ function Worksheet() {
 
 //This is the chatbox component to display what the AI returns, to be used as a subcomponent of ChatPortal
 function ChatBox({chatResponse}) {
+    chatResponse = {__html: chatResponse}
     return(
-        <p className="chatResponse">Eiji: {chatResponse ? chatResponse : "Please Submit Request."}</p>
+        <div dangerouslySetInnerHTML={chatResponse}></div>
     );
 }
 
