@@ -27,28 +27,28 @@ async function CallChat(userChoices) {
 
 
 function Worksheet() {
-    const [userChoiceState, setChoiceValues] = useState('');
+    //const [userChoiceState, setChoiceValues] = useState('');
     const [chatDisplayState, setDisplayValue] = useState('');
 
     //The initial axios request is async but we need additional async handling because
-    //the call to OpenAI is async as well so that messes up the response
+    //the call to OpenAI is async as well so that messes up the response variable if not
     async function handleSubmit(e) {
         e.preventDefault();
-        setDisplayValue("Worksheet Generating...");
-        //In our chat page we're able to get by with just the text.
-        //Here, that isn't so--it's important to read it as form data instead.
-
         var form = e.target;
         var formData = new FormData(form); //Lets us work with form data
-        var formJson = Object.fromEntries(formData); //we need good ol Jason's help here to pass to server and for testing purposes
+        var formJson = {difficulty: formData.get("difficulty"), type: formData.get("type"), key: formData.get("key")}; //we need good ol Json's help here to pass to server and for testing purposes
+        setDisplayValue("Worksheet Generating...");
 
-        setChoiceValues(formJson);
+        //setChoiceValues(formJson);
+        //In our chat page we're able to get by with just the text because that's all that matters.
+        //Here, that isn't so--it's important to read it as form data instead.
+        //Could be worthwhile (for optimization) to move this server-side.
+        console.log(formJson);
         //console.log(formJson);
-        var chatPass = userChoiceState;
+        var chatPass = formJson;
         var chatResponse = await CallChat(chatPass);
         setDisplayValue(chatResponse);
         console.log(chatResponse);
-        
     }
     return (
         <form className="worksheetForm" onSubmit={handleSubmit}>
@@ -69,8 +69,8 @@ function Worksheet() {
                 <option value="written">Written Response</option>
                 <option value="graded reading">Graded Reading</option>
             </select>
-            <label htmlFor="key" id="keySelect" defaultValue={"no"}>Answer Key?</label>
-            <select>
+            <label htmlFor="key" id="keySelect">Answer Key?</label>
+            <select id="keySelect" name="key" defaultValue={"no"}>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>

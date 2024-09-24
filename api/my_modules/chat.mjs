@@ -1,6 +1,9 @@
+//An all-purpose chat interaction module made as the backbone of the API
+//communication in EijiPT
+
 import OpenAI from 'openai/index.mjs';
-import express from 'express';
-var router = express.Router();
+//import express from 'express';
+
 const APIKey = "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";
 const client = new OpenAI({apiKey: APIKey});
 //DO NOT LEAVE THIS IN WHEN PUBLIC
@@ -38,9 +41,11 @@ export async function SendChat(reqChatType, reqUserText) {
     return completion.choices[0].message.content;
 
 }
-
+//
+//
 //Function for worksheet requests.
 export async function RequestWorksheet(req) {
+    console.log("Body: " + req);
     var difficulty = req.body.difficulty;
     var type = req.body.type;
     var isKey = req.body.key;
