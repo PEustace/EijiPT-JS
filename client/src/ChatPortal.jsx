@@ -2,18 +2,6 @@ import { useState } from 'react'
 import './App.css'
 import axios from 'axios';
 
-//VERY EXPLICITLY DO NOT USE THE INGRESS ENDPOINT
-//For whatever reason, using the ingress endpoint is... a dead end.
-//Use the application URL from now on--you can find by going to:
-//Azure->Container Apps->Managed Environment->Container App->Browse
-//Copy that URL. Use /api for a test call which should return "Hello!"
-
-async function TestCall() {
-    console.log("Sending!");
-    
-    const response = axios.get("https://eijiptjs-api.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/").catch(error => console.log(error.message));
-    return response;
-}
 async function CallChat(chatType, userText) {
     const response = await axios.post('https://eijiptjs-api.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/chat/', {
         chatType: chatType, //Type of chat, i.e. basic tutor or translator
