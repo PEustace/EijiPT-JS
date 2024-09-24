@@ -10,9 +10,11 @@ import axios from 'axios';
 //So we construct a prompt based on the user's choices on the server side
 
 //I'd like to keep /worksheet as the endpoint here even if the scope changes later (i.e. graded readings)
-async function CallChat(userChoices) {
+async function CallChat(difficulty, type, key) {
     const response = await axios.post("https://eijiptjs-api.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/chat/worksheet", {
-        userChoices: userChoices})  //JSON data
+        difficulty: difficulty,
+        type: type,
+        key: key})  //JSON data
     .catch(error => {
         console.log(error);
         console.log(error.message);
@@ -39,14 +41,16 @@ function Worksheet() {
         var formJson = {difficulty: formData.get("difficulty"), type: formData.get("type"), key: formData.get("key")}; //we need good ol Json's help here to pass to server and for testing purposes
         setDisplayValue("Worksheet Generating...");
 
+        var difficulty = formJson.difficulty;
+        var type = formJson.type;
+        var key = formJson.key;
+
         //setChoiceValues(formJson);
         //In our chat page we're able to get by with just the text because that's all that matters.
         //Here, that isn't so--it's important to read it as form data instead.
         //Could be worthwhile (for optimization) to move this server-side.
-        console.log(formJson);
         //console.log(formJson);
-        var chatPass = formJson;
-        var chatResponse = await CallChat(chatPass);
+        var chatResponse = await CallChat(difficulty, type, key);
         setDisplayValue(chatResponse);
         console.log(chatResponse);
     }
