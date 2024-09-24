@@ -11,7 +11,7 @@ import axios from 'axios';
 
 //I'd like to keep /worksheet as the endpoint here even if the scope changes later (i.e. graded readings)
 async function CallChat(difficulty, type, key) {
-    const response = await axios.post("http://localhost:3000/api/chat/worksheet", {
+    const response = await axios.post("https://eijiptjs-api.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/chat/worksheet", {
         difficulty: difficulty,
         type: type,
         key: key})  //JSON data
@@ -58,7 +58,7 @@ function Worksheet() {
         <form className="worksheetForm" onSubmit={handleSubmit}>
             <label htmlFor="difficultySelect">Level:</label>
             <select name="difficulty" id="difficultySelect" defaultValue={"basic easy"}>
-                <option value="basic easy">Beginner</option>
+                <option value="basic easy below N5">Beginner</option>
                 <option value="N5">N5</option>
                 <option value="N4">N4</option>
                 <option value="N3">N3</option>
