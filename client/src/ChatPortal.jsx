@@ -3,7 +3,7 @@ import './App.css'
 import axios from 'axios';
 
 async function CallChat(chatType, userText) {
-    const response = await axios.post('https://eijiptjs-api.blueforest-1a6441a0.eastus.azurecontainerapps.io/api/chat/', {
+    const response = await axios.post('https://api.eustace.dev/api/chat/', {
         chatType: chatType, //Type of chat, i.e. basic tutor or translator
         userText: userText}) //User's text entered
     .catch(error => {
@@ -56,7 +56,10 @@ function ChatPortal() {
 //This is the chatbox component to display what the AI says, to be used as a subcomponent of ChatPortal
 function ChatBox({chatResponse}) {
     return(
-        <p className="chatResponse">Eiji: {chatResponse ? chatResponse : "Hello, I'm Eiji, your personal Japanese tutor! If you have questions about grammar, vocabulary, culture, or anything else, ask away!"}</p>
+        <div className="eijiResponse">
+            <p>Eiji: {chatResponse ? chatResponse : "Hello, I'm Eiji, your personal Japanese tutor! If you have questions about grammar, vocabulary, culture, or anything else, ask away!"}</p>
+        </div>
+        
     );
 }
 

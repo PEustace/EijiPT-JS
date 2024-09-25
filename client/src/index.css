@@ -69,30 +69,41 @@ button:focus-visible {
 
 .userEntry {
   color: #000000;
-  background-color: #ffd6a3;
-  font-weight: bold;
+  background-color: #ffffff;
 
-  border: rgb(255, 119, 0)
+  margin-top: 100px;
+  border: rgb(0, 0, 0);
+  border-style:groove;
+  resize: none;
+  text-align: center;
 }
 
 .chatForm {
 
 }
 
-.chatResponse {
+.eijiResponse {
   font-size: large;
   text-align: center;
-  color: rgb(255, 166, 0);
-
-
+  color:#ffffff;
+  font-weight: bolder;
+  border:#ff8037;
+  border-width:2px;
+  border-style:outset;
+  border-radius:10px;
+  background-color: rgb(255, 171, 122);
 }
 
 .navBar {
   border:solid;
   border-width: 1px;
   border-color: #000000;
-  background-color: rgb(248, 232, 217);
+  border-style:solid;
+  background-color: rgb(255, 163, 77);
   position:relative;
+  color: #000000;
+  text-align: center;
+  justify-content:center;
 }
 
 div.navBar nav {
@@ -102,15 +113,48 @@ div.navBar nav {
 div.navBar ul {
   list-style-type: none;
   overflow: hidden;
-  display: inline;
 }
 
 div.navBar li {
-  display:inline;
+  display:inline-flex;
+  left: 10px;
+  right: 10px;
   margin: 0;
-  padding: 20px;
+  padding: 10px;
+  border-color:#000000;
+  border-style:inset;
+  min-width: 110px;
+  background-color:#ffdcc8;
+  justify-content: center;
 }
 div.navBar h1 {
   font-size: 40px;
+  display:inline-flex;
+}
+
+div.navBar a:link {
+  color:#ff8c00;
+  font-weight: bold;
+}
+div.navBar a:visited {
+  color:#ff8c00;
+  font-weight: bold;
+}
+div.navBar a:hover {
+  color:#ffffff;
+  font-weight: bolder;
+}
+
+form.worksheetForm select, form.worksheetForm label, form.worksheetForm button {
+  display:flex;
   text-align: center;
+}
+
+div.worksheetClass {
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #000000;
+  background-color: rgb(255, 246, 230);
+  color: #000000;
+  font-weight: bold;
 }
