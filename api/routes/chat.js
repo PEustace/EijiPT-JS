@@ -5,7 +5,8 @@ var chat;
 
 //Importing the module that will allow communication with openai
 async function pullModule() {
-    chat = await import('../my_modules/chat.mjs')
+    chat = await import('../my_modules/chat.mjs');
+    worksheet = await import('../my_modules/worksheet_processing.mjs');
 }
 
 pullModule();
@@ -24,6 +25,12 @@ router.post('/worksheet', async function(req, res, next) {
     console.log("Worksheet request received.");
     const response = await chat.RequestWorksheet(req.body.difficulty, req.body.type, req.body.key);
     res.send(response);
-})
+});
+
+router.get('/work_test', async function (req, res, next) {
+    console.log("Testing worksheet build...");
+    var worksheet_data = worksheet.ProcessWorksheet(worksheet.test_data);
+    res.send(worksheet_data);
+});
 
 module.exports = router;

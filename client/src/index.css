@@ -124,7 +124,7 @@ div.navBar li {
   border-color:#000000;
   border-style:inset;
   min-width: 110px;
-  background-color:#ffdcc8;
+  background-color:#ff5e00;
   justify-content: center;
 }
 div.navBar h1 {
@@ -133,21 +133,27 @@ div.navBar h1 {
 }
 
 div.navBar a:link {
-  color:#ff8c00;
+  color:#ffffff;
   font-weight: bold;
 }
 div.navBar a:visited {
-  color:#ff8c00;
+  color:#ffffff;
   font-weight: bold;
 }
 div.navBar a:hover {
-  color:#ffffff;
+  color:#f99704;
   font-weight: bolder;
 }
 
 form.worksheetForm select, form.worksheetForm label, form.worksheetForm button {
   display:flex;
   text-align: center;
+}
+
+form.worksheetForm select {
+  background-color:#f99704;
+  color:#ffffff;
+  font-weight:bold;
 }
 
 div.worksheetClass {
@@ -157,4 +163,5 @@ div.worksheetClass {
   background-color: rgb(255, 246, 230);
   color: #000000;
   font-weight: bold;
+  min-height: 10px;
 }
