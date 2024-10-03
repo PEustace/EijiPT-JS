@@ -10,11 +10,10 @@ import axios from 'axios';
 //So we construct a prompt based on the user's choices on the server side
 
 //I'd like to keep /worksheet as the endpoint here even if the scope changes later (i.e. graded readings)
-async function CallChat(difficulty, type, key) {
-    const response = await axios.post("http://localhost:3000/api/chat/worksheet"//, {
-        //difficulty: difficulty,
-        //type: type,
-        //key: key}
+async function CallChat(difficulty, type) {
+    const response = await axios.post("http://localhost:3000/api/chat/worksheet", {
+        difficulty: difficulty,
+        type: type }
         )  //JSON data
     .catch(error => {
         console.log(error);
@@ -39,19 +38,18 @@ function Worksheet() {
         e.preventDefault();
         var form = e.target;
         var formData = new FormData(form); //Lets us work with form data
-        var formJson = {difficulty: formData.get("difficulty"), type: formData.get("type"), key: formData.get("key")}; //we need good ol Json's help here to pass to server and for testing purposes
+        var formJson = {difficulty: formData.get("difficulty"), type: formData.get("type")}; //we need good ol Json's help here to pass to server and for testing purposes
         setDisplayValue("Worksheet Generating...");
 
         var difficulty = formJson.difficulty;
         var type = formJson.type;
-        var key = formJson.key;
 
         //setChoiceValues(formJson);
         //In our chat page we're able to get by with just the text because that's all that matters.
         //Here, that isn't so--it's important to read it as form data instead.
         //Could be worthwhile (for optimization) to move this server-side.
         //console.log(formJson);
-        var chatResponse = await CallChat(difficulty, type, key);
+        var chatResponse = await CallChat(difficulty, type);
         setDisplayValue(chatResponse);
         console.log(chatResponse);
     }
@@ -83,11 +81,12 @@ function Worksheet() {
             {/*it runs every re-render if we don't make it an arrow function. Or it did.*/}
             <button type="submit">Submit</button>
         </form>
-        <div className="worksheetClass">
+        <div id="worksheet"className="worksheetClass">
         {
-            chatDisplayState.worksheet ? chatDisplayState.worksheet.map((item, i) => <WorksheetBox display={item} key={i} id={i}></WorksheetBox>) : <p></p>
+            chatDisplayState.worksheet ? chatDisplayState.worksheet.map((item, i) => <WorksheetBox display={item} key={i} id={i}></WorksheetBox>) : <p>Worksheet Pending. Please Submit or Wait.</p>
         }
         </div>
+        <button hidden={chatDisplayState.worksheet ? false : true} onClick={() => window.print()}>Print Page</button>
         </div>
         
     );

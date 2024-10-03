@@ -46,27 +46,19 @@ export async function SendChat(reqChatType, reqUserText) {
 //
 //
 //Function for worksheet requests.
-export async function RequestWorksheet(difficultyPass, typePass, keyPass) {
-    console.log("Reqpass: " + difficultyPass + typePass + keyPass);
+export async function RequestWorksheet(difficultyPass, typePass) {
+    console.log("Reqpass: " + difficultyPass + typePass);
     var difficulty = difficultyPass;
     var type = typePass;
-    var isKey = keyPass;
-
-    if (isKey == "yes") {
-        isKey = ". Separate at the bottom with the string @123 and afterwords create only the answer key."
-    }
-    else {
-        isKey = ".";
-    }
     //Construct prompt
-    var prompt = "Generate an HTML-form-formatted Japanese learning worksheet with three sections with a level of " + difficulty + ". The subject matter should be " + type + isKey + " Give only the html tags that can slot into an existing <body>, so no doctype or <html>, etc. No submit button.";
+    var prompt = "Build an array of JSON data for a Japanese language quiz for an English speaker with 3 sections (each being a separate object in the array) themed around travel. Each section should have five questions. Make the key the question number that counts the number it is so far and make the value the question. Make it Genki 1 level and keep it simple. Vary the types of sections as a real quiz. Do not provide other text. Format as such with these specific key naming conventions: {'section': the name of the section, 1: 'Question 1 Here'} etc Also generate an answer key after the sections. Name this section key/value 'section': 'Answer Key'. The answer key should only be in either romaji or kana. Use otherwise proper JSON format. Do not include formatting tags. Give plain text.";
 
-    var response = ChatCompile(prompt);
-
+    var response = ChatCompileSend(prompt);
+    
     return response;
 }
 
-async function ChatCompile(prompt) {
+async function ChatCompileSend(prompt) {
 
     //userValue removed
 
@@ -78,7 +70,7 @@ async function ChatCompile(prompt) {
     console.log(messageJson);
 
     const completion = await client.chat.completions.create({
-        model: "gpt-3.5-turbo",
+        model: "gpt-4o-mini",
         messages: [messageJson]
     }).catch((error) => {console.log(error)});
 

@@ -2,7 +2,7 @@
 //We pass in the worksheet JSON array which is structured as:
 // [{section: Vocabulary, 1: "What is bread"?, 2: "etc."}, {section: Grammar, 1: "etc."}]
 //Will split off a potential answer key with a breaking code
-export function ProcessWorksheet(worksheet_data) {
+export async function ProcessWorksheet(worksheet_data) {
     //We need to introduce our own list to handle the compiled data
     //Won't need another array for this because we're mashing it all together into one string
     //that will be delivered to the client.
@@ -10,24 +10,30 @@ export function ProcessWorksheet(worksheet_data) {
 
     //Scaffolding for an answer key.
     var answer_key = [];
+    //Initial reception of data is going to be a string.
+    //Fix that, because it's a very annoying and... costly bug.
+    //...but it is kinda funny.
+    worksheet_data = JSON.parse(worksheet_data);
+    console.log("Worksheet data: " + worksheet_data + "End.");
+    
 
     //For each section of the worksheet. If NOT answer key, continue. If an answer key, break out as such and put that in a separate space.
     for (var i = 0; i < Object.keys(worksheet_data).length; i++) {
         var section = worksheet_data[i];
-        console.log(section);
+        //console.log(section);
         //Build the header separately at the start
-        if (section['section'] != "Answer Key") {
+        if (section["section"] != "Answer Key") {
             built_worksheet.push(section["section"]);
         }
         else {
             answer_key.push(section["section"]);
         }
         if (section["section"] != "Answer Key") {
-            console.log("Not an answer key.");
+            //console.log("Not an answer key.");
             //Holds the question count of that section
             var ans_i = 0;
             for (var question_info in section) {
-                console.log(question_info);
+                //console.log(question_info);
                 ans_i++;
                 if (ans_i % 6 != 0) {
                     var question = section[parseInt(question_info)];
@@ -37,7 +43,7 @@ export function ProcessWorksheet(worksheet_data) {
             }
         }
         else {
-            console.log("Probably an answer key.");
+            //console.log("Probably an answer key.");
             var ans_i = 0;
             for (var question_info in section) {
                 ans_i++;

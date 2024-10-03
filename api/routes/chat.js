@@ -24,13 +24,13 @@ router.post('/', async function(req, res, next) {
 //Outdated worksheet handling method
 router.post('/worksheet_old', async function(req, res, next) {
     console.log("Worksheet request received.");
-    const response = await chat.RequestWorksheet(req.body.difficulty, req.body.type, req.body.key);
+    const response = await chat.RequestWorksheet(req.body.difficulty, req.body.type);
     res.send(response);
 });
-
 router.post('/worksheet', async function (req, res, next) {
     console.log("Testing worksheet build...");
-    var worksheet_data = worksheet.ProcessWorksheet(worksheet.test_data);
+    var worksheet_data = await worksheet.ProcessWorksheet(await chat.RequestWorksheet(req.body.difficulty, req.body.type));
+    console.log("Finished worksheet: " + worksheet_data);
     res.send(worksheet_data);
 });
 
