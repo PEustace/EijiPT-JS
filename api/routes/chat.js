@@ -21,13 +21,14 @@ router.post('/', async function(req, res, next) {
     res.send(response);
 });
 
-router.post('/worksheet', async function(req, res, next) {
+//Outdated worksheet handling method
+router.post('/worksheet_old', async function(req, res, next) {
     console.log("Worksheet request received.");
     const response = await chat.RequestWorksheet(req.body.difficulty, req.body.type, req.body.key);
     res.send(response);
 });
 
-router.get('/work_test', async function (req, res, next) {
+router.post('/worksheet', async function (req, res, next) {
     console.log("Testing worksheet build...");
     var worksheet_data = worksheet.ProcessWorksheet(worksheet.test_data);
     res.send(worksheet_data);

@@ -11,10 +11,11 @@ import axios from 'axios';
 
 //I'd like to keep /worksheet as the endpoint here even if the scope changes later (i.e. graded readings)
 async function CallChat(difficulty, type, key) {
-    const response = await axios.post("https://api.eustace.dev/api/chat/worksheet", {
-        difficulty: difficulty,
-        type: type,
-        key: key})  //JSON data
+    const response = await axios.post("http://localhost:3000/api/chat/worksheet"//, {
+        //difficulty: difficulty,
+        //type: type,
+        //key: key}
+        )  //JSON data
     .catch(error => {
         console.log(error);
         console.log(error.message);
@@ -55,6 +56,7 @@ function Worksheet() {
         console.log(chatResponse);
     }
     return (
+        <div>
         <form className="worksheetForm" onSubmit={handleSubmit}>
             <label htmlFor="difficultySelect">Level:</label>
             <select name="difficulty" id="difficultySelect" defaultValue={"basic easy"}>
@@ -80,19 +82,31 @@ function Worksheet() {
             </select>
             {/*it runs every re-render if we don't make it an arrow function. Or it did.*/}
             <button type="submit">Submit</button>
-
-            <ChatBox chatResponse={chatDisplayState}></ChatBox>
         </form>
+        <div className="worksheetClass">
+        {
+            chatDisplayState.worksheet ? chatDisplayState.worksheet.map((item, i) => <WorksheetBox display={item} key={i} id={i}></WorksheetBox>) : <p></p>
+        }
+        </div>
+        </div>
         
     );
 }
 
 //This is the chatbox component to display what the AI returns, to be used as a subcomponent of ChatPortal
-function ChatBox({chatResponse}) {
-    chatResponse = {__html: chatResponse}
-    return(
-        <div className="worksheetClass" dangerouslySetInnerHTML={chatResponse}></div>
-    );
+function WorksheetBox({display, id}) {
+    //chatResponse = {__html: chatResponse}
+    if (id == 0 || id == 6 || id == 12) {
+        return (
+            <h1 className="worksheetClass" id={id}>{display}</h1>
+        );
+    }
+    else {
+        return(
+            <p className="worksheetClass" id={id}>{display}</p>
+        );
+    }
+    
 }
 
 /* axios.get('https://eijipt-js.azurewebsites.net').then((data) => {

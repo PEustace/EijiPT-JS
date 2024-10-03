@@ -1,6 +1,8 @@
 //An all-purpose chat interaction module made as the backbone of the API
 //communication in EijiPT
 
+//This module is all portions that interact directly with OpenAI
+
 import OpenAI from 'openai/index.mjs';
 //import express from 'express';
 

@@ -16,16 +16,24 @@ export function ProcessWorksheet(worksheet_data) {
         var section = worksheet_data[i];
         console.log(section);
         //Build the header separately at the start
-        built_worksheet.push("<h1 className='worksheetClass'>" + section["section"] + "</h1>");
+        if (section['section'] != "Answer Key") {
+            built_worksheet.push(section["section"]);
+        }
+        else {
+            answer_key.push(section["section"]);
+        }
         if (section["section"] != "Answer Key") {
-            var ans_i = 0;
             console.log("Not an answer key.");
+            //Holds the question count of that section
+            var ans_i = 0;
             for (var question_info in section) {
                 console.log(question_info);
                 ans_i++;
-                var question = section[parseInt(question_info)];
-                //When it gets to the user, it needs to be displayed.
-                built_worksheet.push("<p className='worksheetClass'>" + ans_i + ": " + question + "</p>");
+                if (ans_i % 6 != 0) {
+                    var question = section[parseInt(question_info)];
+                    //When it gets to the user, it needs to be displayed as such.
+                    built_worksheet.push(ans_i + ": " + question);
+                }
             }
         }
         else {
@@ -35,7 +43,12 @@ export function ProcessWorksheet(worksheet_data) {
                 ans_i++;
                 var question = section[question_info];
                 answer_key.push(ans_i + ": " + question);
+                if (ans_i == 5) {
+                    ans_i = 0;
+                    answer_key.push("----");
+                }
             }
+            answer_key.pop();
         }
     }
     console.log(built_worksheet);
