@@ -11,7 +11,7 @@ import axios from 'axios';
 
 //I'd like to keep /worksheet as the endpoint here even if the scope changes later (i.e. graded readings)
 async function CallChat(difficulty, type) {
-    const response = await axios.post("http://localhost:3000/api/chat/worksheet", {
+    const response = await axios.post("https://api.eustace.dev/api/chat/worksheet", {
         difficulty: difficulty,
         type: type }
         )  //JSON data

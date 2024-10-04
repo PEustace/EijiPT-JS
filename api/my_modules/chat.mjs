@@ -11,36 +11,44 @@ const client = new OpenAI({apiKey: APIKey});
 //DO NOT LEAVE THIS IN WHEN PUBLIC
 var prompt = "Translate.";
 
-export async function SendChat(reqChatType, reqUserText) {
+export async function SendChat(reqUserText, reqChatHistory) {
     //console.log("Funky monkey");
     //res.sendFile('/index.html', {root: __dirname + '/../'});
-    var chatType = reqChatType;
-    console.log(chatType);
     //console.log("Funkier monkier.");
     var userText = reqUserText;
+    var chatHistory = reqChatHistory;
     console.log("User text!");
     console.log(userText);
     
-
-    if (chatType == "user") {
     prompt = "You are a Japanese language tutor for an English speaker named Eiji (or 英字). You will act as if you are a human tutor. Keep things simple. Only help the user with this subject."
-    }
-    //console.log("Funkiest monkiest.");
-    const completion = await client.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        messages:
-            [{
+    //If there is no history, establish the basic history
+    if (chatHistory == "empty") {
+        chatHistory = [];
+        chatHistory.push({
             "role": "system",
             "content": prompt},
-            
+            {"role": "assistant",
+             "content": "Hello, I'm Eiji, your personal Japanese tutor! If you have questions about grammar, vocabulary, culture, or anything else, ask away!"
+            },
             {"role": "user", 
             "content": userText
-            }]
+            })
+    }
+    //Otherwise just use the current history and add the usertext
+    else {
+        chatHistory.push({"role": "user", "content": userText})
+    }
+    //No matter what, send the chat
+    const completion = await client.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: chatHistory
     }).catch((error) => {console.log(error)});
 
+    //Make sure to add the response to the chat history
+    chatHistory.push(completion.choices[0].message);
     console.log("About to send the choice.");
     console.log(completion.choices[0]);
-    return completion.choices[0].message.content;
+    return chatHistory;
 
 }
 //

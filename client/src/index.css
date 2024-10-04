@@ -165,3 +165,33 @@ div.worksheetClass {
   font-weight: bold;
   min-height: 10px;
 }
+
+.assistant {
+  font-size: large;
+  text-align: left;
+  color:#ffffff;
+  font-weight: bolder;
+  border:#ff8037;
+  border-width:2px;
+  border-style:outset;
+  border-radius:10px;
+  background-color: rgb(255, 171, 122);
+  float:left;
+  max-height:fit-content;
+  max-width:fit-content;
+}
+
+.user {
+  font-size: large;
+  text-align: left;
+  color:#000000;
+  font-weight: bolder;
+  border:#ff8037;
+  border-width:2px;
+  border-style:outset;
+  border-radius:10px;
+  background-color: rgb(255, 253, 253);
+  float:right;
+  max-height:fit-content;
+  max-width:fit-content;
+}
