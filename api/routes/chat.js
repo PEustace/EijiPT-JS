@@ -16,7 +16,7 @@ pullModule();
 //userChat, chatType params
 router.post('/', async function(req, res, next) {
     console.log("Chat request received.");
-    const response = await chat.SendChat(req.body.userText, req.body.chatHistory);
+    const response = await chat.SendChat(req.body.chatHistory);
     console.log("Response: " + response);
     res.send(response);
 });
