@@ -2,13 +2,12 @@ import { useState } from 'react'
 import './App.css'
 import axios from 'axios';
 
-async function CallChat(userText, chatHistoryState) {
-    if (!chatHistoryState) {
-        chatHistoryState = "empty";
+async function CallChat(chatHistory) {
+    if (chatHistory.length == 0) {
+        chatHistory = "empty";
     }
     const response = await axios.post('https://api.eustace.dev/api/chat', {
-        userText: userText,
-        chatHistory: chatHistoryState})
+        chatHistory: chatHistory})
     .catch(error => {
         return error;
     })
@@ -24,11 +23,8 @@ async function CallChat(userText, chatHistoryState) {
 
 function ChatPortal() {
     const [userTextState, setChatValue] = useState('');
-    //This state is going to be an array of current and previous responses so we can send and receive 
-    //the chat history
-    const [chatDisplayState, setDisplayValue] = useState('');
     //State to manage chathistory until it's time to process
-    const [chatHistoryState, setChatHistory] = useState('');
+    const [chatHistoryState, setChatHistory] = useState([{"role": "system", "content": "You are Eiji (or 英字), a Japanese language tutor for an English speaker. You will act as if you are a human tutor. Keep things simple. Only help the user with this subject."}, {"role": "assistant", "content": "Hello, I am Eiji, your personal Japanese tutor! If you have questions about grammar, vocabulary, culture, or anything else, ask away!"}]);
     
     function handleChange(e) {
         setChatValue(e.target.value);
@@ -37,33 +33,29 @@ function ChatPortal() {
     //the call to OpenAI is async as well so that messes up the response
     async function handleSubmit(e) {
         e.preventDefault();
-        var userText = userTextState;
         setChatValue('');
-        var isThereAChat = chatHistoryState;
-        //Set this before calling to provide a "chat" feel.
-        if (!isThereAChat) {
-            setDisplayValue({role: "user", content: userText});
-        }
-        var chatResponse = await CallChat(userText, chatHistoryState);
+        setChatHistory([...chatHistoryState, {"role": "user", "content": userTextState}]);
+        console.log(chatHistoryState);
+        setChatHistory(await CallChat([...chatHistoryState, {"role": "user", "content": userTextState}]));
         //This is the entire history of the chat
-        setChatHistory(chatResponse);
         console.log("Chat History: " + chatHistoryState);
         //In contrast, this is just the most recent message.
-        setDisplayValue(chatResponse[chatResponse.length-1].content);
-        console.log(chatResponse);
+        //setDisplayValue(chatResponse[chatResponse.length-1].content);
+        console.log(chatHistoryState);
         
     }
     return (
         <form className="chatForm" onSubmit={handleSubmit}>
+            <table>
             {
-                chatDisplayState ? chatHistoryState.map((item, i) => <ChatBox key={i} chatResponse={item}></ChatBox>) : <p className="assistant">Hello, I am Eiji, your personal Japanese tutor! If you have questions about grammar, vocabulary, culture, or anything else, ask away!</p>
+                
+                chatHistoryState ? chatHistoryState.map((item, i) => <ChatBox key={i} chatResponse={item}></ChatBox>) : <p className="assistant">Hello, I am Eiji, your personal Japanese tutor! If you have questions about grammar, vocabulary, culture, or anything else, ask away!</p>
+                
             }
-            <ChatBox chatResponse={chatHistoryState}></ChatBox>
+            </table>
             <textarea className="userEntry" id="chatBox" name="chatBox"
             value = {userTextState}
-            onChange={handleChange}
-            
-            ></textarea>
+            onChange={handleChange}></textarea>
             {/*it runs every re-render if we don't make it an arrow function. Or it did.*/}
             <button type="submit">^</button>
         </form>
@@ -76,7 +68,7 @@ function ChatBox({chatResponse}) {
     //We're going to map the entire chat history. AI responses will be tagged with the id "assistant" whereas user will be "user"
     if (chatResponse.role != "system") {
         return(
-            <p className={chatResponse.role}>{chatResponse.content}</p>
+            <tr><p className={chatResponse.role}>{chatResponse.content}</p></tr>
         );
     }
 }

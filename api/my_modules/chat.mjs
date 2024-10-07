@@ -11,16 +11,15 @@ const client = new OpenAI({apiKey: APIKey});
 //DO NOT LEAVE THIS IN WHEN PUBLIC
 var prompt = "Translate.";
 
-export async function SendChat(reqChatHistory) {
+export async function SendChat(chatHistory) {
     //console.log("Funky monkey");
     //res.sendFile('/index.html', {root: __dirname + '/../'});
     //console.log("Funkier monkier.");
-    console.log("ReqChatHistory: " + reqChatHistory);
-    var chatHistory = reqChatHistory;
+    console.log("ReqChatHistory: " + chatHistory);
 
     const completion = await client.chat.completions.create({
         model: "gpt-3.5-turbo",
-        messages: [chatHistory]
+        messages: chatHistory
     }).catch((error) => {console.log(error)});
 
     //Make sure to add the response to the chat history
