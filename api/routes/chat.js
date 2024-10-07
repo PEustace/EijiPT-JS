@@ -34,4 +34,11 @@ router.post('/worksheet', async function (req, res, next) {
     res.send(worksheet_data);
 });
 
+router.post('/translate', async function (req, res, next) {
+    console.log("Testing translation...");
+    var translation_data = await chat.RequestTranslation(req.body.chatHistory, req.body.type);
+    console.log("Finished translation: " + translation_data);
+    res.send(translation_data);
+});
+
 module.exports = router;

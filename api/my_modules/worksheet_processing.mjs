@@ -12,7 +12,7 @@ export async function ProcessWorksheet(worksheet_data) {
     var answer_key = [];
     //Initial reception of data is going to be a string.
     //Fix that, because it's a very annoying and... costly bug.
-    //...but it is kinda funny.
+    //...but it was kinda funny.
     worksheet_data = JSON.parse(worksheet_data);
     console.log("Worksheet data: " + worksheet_data + "End.");
     

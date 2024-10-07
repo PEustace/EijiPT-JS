@@ -37,10 +37,21 @@ export async function RequestWorksheet(difficultyPass, typePass) {
     var difficulty = difficultyPass;
     var type = typePass;
     //Construct prompt
-    var prompt = "Build an array of JSON data for a Japanese language quiz for an English speaker with 3 sections (each being a separate object in the array) themed around travel. Each section should have five questions. Make the key the question number that counts the number it is so far and make the value the question. Make it Genki 1 level and keep it simple. Vary the types of sections as a real quiz. Do not provide other text. Format as such with these specific key naming conventions: {'section': the name of the section, 1: 'Question 1 Here'} etc Also generate an answer key after the sections. Name this section key/value 'section': 'Answer Key'. The answer key should only be in either romaji or kana. Use otherwise proper JSON format. Do not include formatting tags. Give plain text.";
+    var prompt = "Build an array of JSON data for a Japanese language quiz for an English speaker with 3 sections (each being a separate object in the array) themed around " + type + ". Each section should have five questions. Make the key the question number that counts the number it is so far and make the value the question. Make it " + difficulty + " level and keep it simple. Vary the types of sections as a real quiz. Do not provide other text. Format as such with these specific key naming conventions: {'section': the name of the section, 1: 'Question 1 Here'} etc Also generate an answer key after the sections. Name this section key/value 'section': 'Answer Key'. The answer key should only be in either romaji or kana. Use otherwise proper JSON format. Do not include formatting tags. Give plain text.";
 
+    console.log("Difficulty: " + difficulty);
+    console.log("Type :" + type);
     var response = ChatCompileSend(prompt);
     
+    return response;
+}
+
+//Requests a translation of the provided text, type data
+export async function RequestTranslation(chatHistory, type) {
+    var prompt = "You are a Japanese translation machine. Translate the following into " + type + ": " + chatHistory + ". Format as raw JSON data {'content': the translation, 'type': " + {type};
+
+    var response = ChatCompileSend(prompt);
+
     return response;
 }
 

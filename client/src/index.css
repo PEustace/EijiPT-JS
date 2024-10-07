@@ -195,3 +195,10 @@ div.worksheetClass {
   max-height:fit-content;
   max-width:fit-content;
 }
+
+div.worksheetClass h3 {
+  text-align: left;
+}
+div.worksheetClass p {
+  text-align: left;
+}
