@@ -48,7 +48,7 @@ export async function RequestWorksheet(difficultyPass, typePass) {
 
 //Requests a translation of the provided text, type data
 export async function RequestTranslation(chatHistory, type) {
-    var prompt = "You are a Japanese translation machine. Translate the following into " + type + ": " + chatHistory + ". Format as raw JSON data {'content': the translation, 'type': " + {type};
+    var prompt = "You are a Japanese translation machine. Translate the following into " + type + ": " + chatHistory + ". Format as raw JSON data {\"content\": the translation, \"type\": \"" + type + "\".  Do not include formatting. Deliver as a plain string.";
 
     var response = ChatCompileSend(prompt);
 

@@ -26,7 +26,7 @@ function ChatPortal() {
     const [userTextState, setChatValue] = useState('');
     //State to manage chathistory until it's time to process
     const [chatDisplayState, setChatDisplay] = useState();
-    const [buttonTypeState, setButtonType] = useState();
+    const [buttonTypeState, setButtonType] = useState('');
     function handleChange(e) {
         setChatValue(e.target.value);
     }
@@ -43,26 +43,31 @@ function ChatPortal() {
         
     }
     return (
-        <form className="chatForm" onSubmit={handleSubmit}>
-            <table>
+        <div className="translationClass">
+        <form className="translationClass" onSubmit={handleSubmit}>
+            <table className="translationClass">
                 <tr>
-                    {//Only if both chatDisplay exists AND the state type is relevant
-                    chatDisplayState && chatDisplayState.type == "english" ? <ChatBox type="english" value={chatDisplayState.content}></ChatBox> : <th><textarea></textarea></th>}
-                    {chatDisplayState && chatDisplayState.type == "japanese" ? <ChatBox type="japanese" value={chatDisplayState.content}></ChatBox> : <th><textarea></textarea></th>}
+                    <th>English Text</th>
+                    <th>Japanese Text</th>
                 </tr>
                 <tr>
                     
+                    {//Only if both chatDisplay exists AND the state type is relevant
+                    chatDisplayState && chatDisplayState.type == "english" ? <ChatBox type="english" value={chatDisplayState.content}></ChatBox> : chatDisplayState && chatDisplayState.type == "japanese"? <ChatBox type="english" value={userTextState}></ChatBox> : <ChatBox type="english" value=""></ChatBox>}
+                    
+                    {chatDisplayState && chatDisplayState.type == "japanese" ? <ChatBox type="japanese" value={chatDisplayState.content}></ChatBox> : chatDisplayState && chatDisplayState.type == "english" ? <ChatBox type="japanese" value={userTextState}></ChatBox> : <ChatBox type="japanese" value=""></ChatBox>}
+                    
+                </tr>
+                <tr>
                     <th><button type="submit" value="english" onClick={() => setButtonType("english")}>To English</button></th>
                     <th><button type="submit" value="japanese" onClick={() => setButtonType("japanese")}>To Japanese</button></th>
                 </tr>
             </table>
-            <textarea className="userEntry" id="chatBox" name="chatBox"
+        </form>
+        <textarea className="userEntry" id="chatBox" name="chatBox"
             value = {userTextState}
             onChange={handleChange}></textarea>
-            {/*it runs every re-render if we don't make it an arrow function. Or it did.*/}
-            <button type="submit">^</button>
-        </form>
-        
+        </div>
     );
 }
 
@@ -70,7 +75,7 @@ function ChatPortal() {
 function ChatBox({type, value}) {
     //We're going to map the entire chat history. AI responses will be tagged with the id "assistant" whereas user will be "user"
     return(
-        <p>{value}</p>
+        <td>{value}</td>
     )
 }
 
