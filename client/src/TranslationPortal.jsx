@@ -6,7 +6,7 @@ import axios from 'axios';
 //Chathistory for the translationa data and type to 
 //reflect what will be returned to the user (and what is processed into).
 async function CallChat(chatHistory, type) {
-    const response = await axios.post('http://localhost:3000/api/chat/translate', {
+    const response = await axios.post('https://api.eustace.dev/api/chat/translate', {
         chatHistory: chatHistory,
         type: type})
     .catch(error => {
