@@ -18,8 +18,9 @@ function Header() {
                     <li><a href="/">Home</a></li>
                     <li><a href="/chatpage/">Ask a Question</a></li>
                     <li><a href="/practice/">Worksheets and Practice</a></li>
-                    <li><a href="/travel/">Travel Help</a></li>
                     <li><a href="/translate/">Translation</a></li>
+                    {/*This feature has been temporarily removed.*/
+                    /*<li><a href="/travel/">Travel Help</a></li>*/}
                 </ul>
             </nav>
         </div>

@@ -11,7 +11,7 @@ import axios from 'axios';
 
 //I'd like to keep /worksheet as the endpoint here even if the scope changes later (i.e. graded readings)
 async function CallChat(difficulty, type) {
-    const response = await axios.post("http://localhost:3000/api/chat/worksheet", {
+    const response = await axios.post("https://api.eustace.dev/api/chat/worksheet", {
         difficulty: difficulty,
         type: type }
         )  //JSON data
@@ -78,11 +78,6 @@ function Worksheet() {
                 <option value="graded paragraph reading">Graded Reading</option>
                 <option value="written response">Written Response</option>
             </select>
-            <label htmlFor="key" id="keySelect">Answer Key?</label>
-            <select id="keySelect" name="key" defaultValue={"no"}>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
             {/*it runs every re-render if we don't make it an arrow function. Or it did.*/}
             <button type="submit">Submit</button>
         </form>
@@ -93,7 +88,7 @@ function Worksheet() {
             <p>Worksheet Pending. Please Submit or Wait.</p>
         }
         </div>
-        <button hidden={answerKeyState ? true : false} onClick={() => setKeyVisibility(true)}>Reveal Answers</button>
+        <button hidden={chatDisplayState.answers ? false : true} onClick={() => setKeyVisibility(true)}>Reveal Answers</button>
         <div hidden={answerKeyState ? false : true} id="answers">
         {
             chatDisplayState.answers ? chatDisplayState.answers.map((item, i) => 
