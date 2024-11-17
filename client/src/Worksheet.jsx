@@ -38,7 +38,7 @@ function Worksheet() {
         e.preventDefault();
         var form = e.target;
         var formData = new FormData(form); //Lets us work with form data
-        var formJson = {difficulty: formData.get("difficulty"), type: formData.get("type")}; //we need good ol Json's help here to pass to server and for testing purposes
+        var formJson = {difficulty: formData.get("difficulty"), type: formData.get("type")}; 
         setDisplayValue("Worksheet Generating...");
 
         var difficulty = formJson.difficulty;
@@ -47,7 +47,7 @@ function Worksheet() {
         //setChoiceValues(formJson);
         //In our chat page we're able to get by with just the text because that's all that matters.
         //Here, that isn't so--it's important to read it as form data instead.
-        //Could be worthwhile (for optimization) to move this server-side.
+        //Could be worthwhile (for optimization) to move this server-side. But not necessary.
         //console.log(formJson);
         var chatResponse = await CallChat(difficulty, type);
         setDisplayValue(chatResponse);
