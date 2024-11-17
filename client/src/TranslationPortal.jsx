@@ -47,32 +47,28 @@ function ChatPortal() {
         <form className="translationClass" onSubmit={handleSubmit}>
             <table className="translationClass">
                 <tr>
-                    <th>English Text</th>
-                    <th>Japanese Text</th>
+                    <th>Translated Text</th>
                 </tr>
                 <tr>
                     
                     {//Only if both chatDisplay exists AND the state type is relevant
-                    chatDisplayState && chatDisplayState.type == "english" ? <ChatBox type="english" value={chatDisplayState.content}></ChatBox> : chatDisplayState && chatDisplayState.type == "japanese"? <ChatBox type="english" value={userTextState}></ChatBox> : <ChatBox type="english" value=""></ChatBox>}
+                    chatDisplayState ? <ChatBox value={chatDisplayState.content}></ChatBox> : <ChatBox value=""></ChatBox>}
                     
-                    {chatDisplayState && chatDisplayState.type == "japanese" ? <ChatBox type="japanese" value={chatDisplayState.content}></ChatBox> : chatDisplayState && chatDisplayState.type == "english" ? <ChatBox type="japanese" value={userTextState}></ChatBox> : <ChatBox type="japanese" value=""></ChatBox>}
-                    
-                </tr>
-                <tr>
-                    <th><button type="submit" value="english" onClick={() => setButtonType("english")}>To English</button></th>
-                    <th><button type="submit" value="japanese" onClick={() => setButtonType("japanese")}>To Japanese</button></th>
                 </tr>
             </table>
-        </form>
+        
         <textarea className="userEntry" id="chatBox" name="chatBox"
             value = {userTextState}
-            onChange={handleChange}></textarea>
+            onChange={handleChange}></textarea> <br></br>
+            <button type="submit" value="english" onClick={() => setButtonType("english")}>To English</button>
+            <button type="submit" value="japanese" onClick={() => setButtonType("japanese")}>To Japanese</button>
+            </form>
         </div>
     );
 }
 
 //This is the chatbox component to display what the AI says, to be used as a subcomponent of ChatPortal
-function ChatBox({type, value}) {
+function ChatBox({value}) {
     //We're going to map the entire chat history. AI responses will be tagged with the id "assistant" whereas user will be "user"
     return(
         <td>{value}</td>

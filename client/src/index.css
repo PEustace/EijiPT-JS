@@ -209,8 +209,13 @@ form.translationClass {
   padding: 10px;
 }
 .translationClass td {
-  width: 100px;
+  min-width: 100px;
   height: 100px;
   border:#000000;
   border-style:solid;
+}
+
+.translationClass textarea {
+  min-width: 100px;
+  min-height: 100px;
 }
