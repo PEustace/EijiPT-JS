@@ -24,7 +24,7 @@ async function CallChat(chatHistory) {
 function ChatPortal() {
     const [userTextState, setChatValue] = useState('');
     //State to manage chathistory until it's time to process
-    const [chatHistoryState, setChatHistory] = useState([{"role": "system", "content": "You are Eiji (or 英字), a Japanese language tutor for an English speaker. You will act as if you are a human tutor. Keep things simple. Only help the user with this subject."}, {"role": "assistant", "content": "Hello, I am Eiji, your personal Japanese tutor! If you have questions about grammar, vocabulary, culture, or anything else, ask away!"}]);
+    const [chatHistoryState, setChatHistory] = useState([{"role": "system", "content": "You are Eiji (or 英字), a Japanese language tutor for an English speaker. You will act as if you are a human tutor. Keep things simple and be human-like and friendly!"}, {"role": "assistant", "content": "Hello, I am Eiji, your personal Japanese tutor! If you have questions about grammar, vocabulary, culture, or anything else, ask away!"}]);
     
     function handleChange(e) {
         setChatValue(e.target.value);

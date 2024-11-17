@@ -32,6 +32,8 @@ function Worksheet() {
     //const [userChoiceState, setChoiceValues] = useState('');
     const [chatDisplayState, setDisplayValue] = useState('');
 
+    //State to determine showing of the answer key.
+    const [answerKeyState, setKeyVisibility] = useState(false);
     //The initial axios request is async but we need additional async handling because
     //the call to OpenAI is async as well so that messes up the response variable if not
     async function handleSubmit(e) {
@@ -45,7 +47,8 @@ function Worksheet() {
         var type = formJson.type;
 
         //setChoiceValues(formJson);
-        //In our chat page we're able to get by with just the text because that's all that matters.
+        //In our chat page we're hypothetically able to get by with just the text because that's all that matters,
+        //so keeping up with states is easy. It's one value we're iterating on.
         //Here, that isn't so--it's important to read it as form data instead.
         //Could be worthwhile (for optimization) to move this server-side. But not necessary.
         //console.log(formJson);
@@ -68,22 +71,29 @@ function Worksheet() {
             <label htmlFor="typeSelect">Focus:</label>
             <select name="type" id="typeSelect" defaultValue={"general"}>
                 <option value="general">General</option>
-                <option value="vocabulary">Vocabulary</option>
-                <option value="matching">Matching</option>
-                <option value="written">Written Response</option>
-                <option value="graded reading">Graded Reading</option>
-            </select>
-            <label htmlFor="key" id="keySelect">Answer Key?</label>
-            <select id="keySelect" name="key" defaultValue={"no"}>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
+                <option value="food">Food</option>
+                <option value="travel">Travel</option>
+                <option value="life words">Life</option>
+                <option value="school and college">School</option>
+                <option value="graded paragraph reading">Graded Reading</option>
+                <option value="written response">Written Response</option>
             </select>
             {/*it runs every re-render if we don't make it an arrow function. Or it did.*/}
             <button type="submit">Submit</button>
         </form>
         <div id="worksheet"className="worksheetClass">
         {
-            chatDisplayState.worksheet ? chatDisplayState.worksheet.map((item, i) => <WorksheetBox display={item} key={i} id={i}></WorksheetBox>) : <p>Worksheet Pending. Please Submit or Wait.</p>
+            chatDisplayState.worksheet ? chatDisplayState.worksheet.map((item, i) => 
+            <WorksheetBox display={item} key={i} id={i} type={"questions"}></WorksheetBox>): 
+            <p>Worksheet Pending. Please Submit or Wait.</p>
+        }
+        </div>
+        <button hidden={chatDisplayState.answers ? false : true} onClick={() => setKeyVisibility(true)}>Reveal Answers</button>
+        <div hidden={answerKeyState ? false : true} id="answers">
+        {
+            chatDisplayState.answers ? chatDisplayState.answers.map((item, i) => 
+            <WorksheetBox display={item} key={i} id={i} type={"answers"}></WorksheetBox>): 
+            <p>Worksheet Pending. Please Submit or Wait.</p>
         }
         </div>
         <button hidden={chatDisplayState.worksheet ? false : true} onClick={() => window.print()}>Print Page</button>
@@ -93,18 +103,26 @@ function Worksheet() {
 }
 
 //This is the chatbox component to display what the AI returns, to be used as a subcomponent of ChatPortal
-function WorksheetBox({display, id}) {
+function WorksheetBox({display, id, type}) {
     //chatResponse = {__html: chatResponse}
-    if (id == 0 || id == 6 || id == 12) {
-        return (
-            <h1 className="worksheetClass" id={id}>{display}</h1>
-        );
+    if (type != "answers") {
+        if (id == 0 || id == 6 || id == 12) {
+            return (
+                <h3 className="worksheetClass" id={id}>{display}</h3>
+            );
+        }
+        else {
+            return(
+                <p className="worksheetClass" id={id}>{display}</p>
+            );
+        }
     }
     else {
         return(
             <p className="worksheetClass" id={id}>{display}</p>
         );
     }
+    
     
 }
 
