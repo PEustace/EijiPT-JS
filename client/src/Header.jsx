@@ -7,9 +7,8 @@ function Header() {
     return (
         <div className="navBar">
             <meta charset="UTF-8" />
-            <link rel="icon" type="image/svg+xml" href="/vite.svg" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-            <title>Vite + React</title>
+            <title>EijiPT</title>
 
             <h1 className="title">EijiPT</h1>
 
